@@ -327,3 +327,34 @@ Gutenberg 标记也必须与区块类型和 HTML 结构匹配。
 -   **固定内容使用 Synced Pattern，需要独立变化的内容单独维护。**
 -   **优先使用原生 Block，只有原生能力不足时才开发自定义区块或插件。**
 -   **以实际前端测试为准，不因结构更复杂就认为更专业。**
+
+
+## 13. 在线查找与复制 Gutenberg Pattern
+
+可以先在在线模式库中浏览布局，点击 **Copy / Copy Pattern**，再回到 WordPress Gutenberg 编辑器按 `Ctrl + V` 粘贴。粘贴后通过 List View 检查区块结构，并按当前主题调整样式。
+
+### 推荐资源
+
+- **[WordPress.org Patterns](https://wordpress.org/patterns/)**：优先使用，适合研究原生 Gutenberg 布局，例如卡片、图文、CTA 和网格。
+- **[WordPress.com Pattern Library](https://wordpress.com/patterns/)**：可浏览和预览不同布局；部分功能可能要求登录。
+- **[Gutenberg Hub](https://gutenberghub.com/)**：第三方布局资源，可作为补充；具体复制功能和授权以每个页面的说明为准。
+- **[Ollie 开源区块主题](https://github.com/OllieWP/ollie)**：适合研究开源模式的区块标记和布局组织方式。
+- **[Twenty Twenty-Five 模式源码](https://github.com/WordPress/wordpress-develop/tree/trunk/src/wp-content/themes/twentytwentyfive/patterns)**：学习 WordPress 官方主题如何组合原生区块。
+
+### 复制与使用注意事项
+
+1. **复制不等于自动保存为 Pattern。** 粘贴后通常只是当前页面中的区块；需要重复使用时，再保存为普通 Pattern 或 Synced Pattern。
+2. **检查区块结构。** 使用 List View 确认 Group、Columns、Grid 及内容区块的层级是否清晰。
+3. **检查主题样式。** 复制的布局不一定会自动带来原网站的字体、颜色、间距或额外 CSS；必要时为组件添加专属类名，并在主题 CSS 中实现样式。
+4. **注意插件依赖。** 某些模式可能使用第三方区块，若目标网站未安装对应插件，布局可能无法完整还原。优先选择原生 Gutenberg 区块。
+5. **检查图片与授权。** 复制布局不代表图片已导入自己的媒体库，也不代表获得图片使用授权；正式上线前应确认来源、许可及图片地址。
+
+### 推荐研究流程
+
+1. 在模式库中搜索 `card`、`features`、`grid`、`image text` 或 `call to action`。
+2. 预览并复制一个符合需求的布局。
+3. 粘贴到测试页面，检查 List View 和前端效果。
+4. 记录原始链接、区块结构、依赖项及需要补充的 CSS。
+5. 测试桌面端与手机端后，再整理为 `examples/` 下的独立实例。
+
+建议每个实例统一包含：`README.md`（说明与步骤）、`block-markup.html`（可复制的 Gutenberg 区块标记）和 `style.css`（组件专属样式）。先研究并验证少量高价值实例，再逐步扩充目录。
