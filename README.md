@@ -358,3 +358,104 @@ Gutenberg 标记也必须与区块类型和 HTML 结构匹配。
 5. 测试桌面端与手机端后，再整理为 `examples/` 下的独立实例。
 
 建议每个实例统一包含：`README.md`（说明与步骤）、`block-markup.html`（可复制的 Gutenberg 区块标记）和 `style.css`（组件专属样式）。先研究并验证少量高价值实例，再逐步扩充目录。
+
+
+## 14. 资源研究原则与示例开发路线
+
+本仓库的目标不是收集尽可能多的漂亮布局，而是建立一套**经过实际 WordPress 环境验证、可复制、可编辑、可维护**的 Gutenberg 实例库。
+
+### 14.1 资源分级
+
+#### A. 优先研究：可直接复制的模式库
+
+- **[WordPress.org Patterns](https://wordpress.org/patterns/)**：首选。通过 Copy 将模式粘贴到编辑器，适合研究原生区块组合。
+- **[WordPress.com Pattern Library](https://wordpress.com/patterns/)**：适合研究完整商业模块和响应式设计；部分内容可能需要登录。
+- **[Pattern Paste: Block Patterns for Any Block Theme](https://wordpress.org/plugins/pattern-paste-block-patterns/)**：提供可在编辑器中插入的模式集合，包含核心区块模式。作为可选研究工具，不是本仓库的必需依赖。
+
+#### B. 研究源码：学习结构，不照搬主题依赖
+
+- **[Ollie](https://github.com/OllieWP/ollie)**：研究真实主题中的 Pattern 文件、区块标记和样式组织。
+- **[Twenty Twenty-Five Pattern 源码](https://github.com/WordPress/wordpress-develop/tree/trunk/src/wp-content/themes/twentytwentyfive/patterns)**：研究官方主题如何组合原生区块。
+- **[WordPress Block Theme Examples](https://github.com/WordPress/block-theme-examples)**：可用于查阅历史开发示例，但该仓库已于 2025 年归档，不作为持续维护的首选资源。
+
+#### C. 参考设计：有选择地借鉴
+
+- **[GenerateBlocks Pattern Library](https://generatepress.com/generateblocks-pattern-library/)**：适合研究成熟的商业布局；部分模式依赖 GenerateBlocks 或 Pro 功能。
+- **[Gutenberg Hub](https://gutenberghub.com/)**：作为第三方设计参考，逐个检查模式的复制方式、插件依赖与授权条件。
+
+### 14.2 资源使用前的兼容性检查
+
+在经典主题中使用任何在线模式或第三方模式插件前，先确认：
+
+1. 模式是否只使用 WordPress Core Blocks。
+2. 是否依赖第三方区块、短代码、JavaScript 或主题专属 CSS。
+3. 所需 WordPress 版本、PHP 版本及主题类型是否满足要求。
+4. 复制后的文字、图片、链接和布局是否仍能在 Gutenberg 中编辑。
+5. 是否需要额外 CSS，且样式能否限制在组件专属类名内。
+6. 图片的来源、使用许可以及是否已保存到自己的媒体库。
+7. 停用提供模式的插件后，已插入内容是否仍正常显示。
+
+**特别提醒：** Pattern Paste 等第三方模式工具的功能、版本要求和主题兼容范围可能变化。安装前应重新查看插件目录中的当前要求；不应因为模式看起来可以复制，就默认它适用于所有经典主题或 WordPress 版本。
+
+### 14.3 示例收录标准
+
+只有完成实际测试后，实例才能标记为“已验证”。每个实例至少记录：
+
+- 原始参考链接及参考来源。
+- 使用的 Gutenberg Block 类型与结构树。
+- 是否只依赖 Core Blocks。
+- 所需自定义 CSS 及 CSS 类名。
+- 桌面端和手机端的测试结果。
+- 图片、链接和交互的处理方式。
+- 已知限制与适用场景。
+
+建议给每个实例标注以下状态之一：
+
+- **Research**：已找到参考资料，尚未实现。
+- **In Progress**：正在转换或测试。
+- **Verified**：已在目标 WordPress 环境中验证。
+- **Deprecated**：不再推荐，注明原因。
+
+### 14.4 examples/ 建设路线
+
+按复用价值和实现难度分阶段推进，不一次性收集大量未经测试的代码。
+
+| 阶段 | 实例 | 主要研究目标 |
+|---|---|---|
+| 1 | Card Layout：双卡片与四卡片 | Group、Grid、Columns、卡片 CSS、响应式 |
+| 1 | Image Text：左右图文布局 | Columns、图片比例、移动端堆叠 |
+| 1 | Feature Cards：企业优势卡片 | 重复卡片、图标或图片、统一间距 |
+| 2 | CTA Section：行动号召 | 标题、说明、按钮、背景与留白 |
+| 2 | Testimonials：客户评价 | 卡片内容结构、图片与信息层级 |
+| 2 | FAQ Section：常见问题 | 原生静态布局与交互插件的取舍 |
+| 3 | Product Detail Section | 独立参数表格与 Synced Pattern 的配合 |
+| 3 | Product Cards / Listing | 静态卡片与动态产品查询的区别 |
+| 3 | Pattern Reuse Workflow | 普通 Pattern、Synced Pattern 与 CSS 维护 |
+
+**第一阶段只完成前三个基础实例。** 每个实例通过复制、编辑、样式和响应式测试后，再开始下一项。
+
+### 14.5 每个实例的统一目录
+
+```text
+examples/
+└── 01-card-layout/
+    ├── README.md
+    ├── block-markup.html
+    └── style.css
+```
+
+- `README.md`：用途、预览、结构树、导入步骤、依赖、测试结果与限制。
+- `block-markup.html`：可导入的 Gutenberg 区块标记；不是任意普通 HTML 片段。
+- `style.css`：该组件所需的专属 CSS，避免污染全站样式。
+
+若某个实例需要 JavaScript、第三方插件或 PHP，应明确说明原因和依赖；不要为了增加功能而默认引入这些复杂度。
+
+### 14.6 本仓库的基础决策顺序
+
+1. **先找原生模式**：确认是否有适合的 Core Blocks 示例。
+2. **再分析结构**：确定 Group、Columns、Grid 及内容区块的职责。
+3. **再做最小适配**：使用专属 CSS 还原目标设计。
+4. **实际验证**：在目标经典主题中检查编辑器与前端、桌面端与手机端。
+5. **最后收录**：将可复用版本及其限制写入 `examples/`。
+
+只有原生区块无法合理满足需求时，才考虑第三方插件、自定义 Block 或 PHP/JavaScript 组件。
